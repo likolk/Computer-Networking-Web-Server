@@ -1,5 +1,7 @@
 import socket
 
+# send
+
 FORMAT = "UTF-8"
 SERVER = "10.40.0.46"
 PORT = 9991
@@ -13,6 +15,8 @@ sck = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sck.sendto(MESSAGE, (SERVER, PORT))
 
 
+
+#receive 
 
 SERVER = "10.40.0.46"
 PORT = 9991
