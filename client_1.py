@@ -5,9 +5,32 @@ DISCONNECT_MESSAGE = "!DC"
 SERVER = "10.40.0.46"
 PORT = 9990
 ADDRESS = (SERVER, PORT)
-ΗEADER = 128
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDRESS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
