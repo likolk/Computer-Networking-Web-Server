@@ -23,8 +23,8 @@ PORT = 9991
 sck = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sck.bind(SERVER, PORT)
 while (True):
-    data, addr = sck.recvfrom(1024)
-    print('received message is: ' + data)
+    datagram, address = sck.recvfrom(1024)
+    print('the datagram received is: ' + datagram)
 
 
 
