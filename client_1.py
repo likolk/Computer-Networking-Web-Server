@@ -8,7 +8,7 @@ ADDRESS = (SERVER, PORT)
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDRESS)
 data = client.recv(1024)
-flag = str(data, FORMAT).rstrip("\n")
+flag = str(data, FORMAT).rstrip("\r\n")
 print(flag)
 client.close()
 
