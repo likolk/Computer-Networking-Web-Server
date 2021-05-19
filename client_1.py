@@ -7,6 +7,10 @@ PORT = 9990
 ADDRESS = (SERVER, PORT)
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDRESS)
+data = client.recv(1024)
+flag = str(data, FORMAT).rstrip("\n")
+print(flag)
+client.close()
 
 
 

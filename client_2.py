@@ -5,7 +5,8 @@ import socket
 FORMAT = "UTF-8"
 SERVER = "10.40.0.46"
 PORT = 9991
-MESSAGE  = "helo"
+MESSAGE_STR = "helo"
+MESSAGE  = MESSAGE_STR.encode(FORMAT)
 
 
 DISCONNECT_MESSAGE = "!DC"
@@ -13,21 +14,13 @@ DISCONNECT_MESSAGE = "!DC"
 ADDRESS = (SERVER, PORT)
 sck = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sck.sendto(MESSAGE, (SERVER, PORT))
-
-
+print(MESSAGE_STR)
 
 #receive 
 
-SERVER = "10.40.0.46"
-PORT = 9991
-sck = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sck.bind(SERVER, PORT)
-while (True):
-    datagram, address = sck.recvfrom(1024)
-    print('the datagram received is: ' + datagram)
-
-
-
+datagram, address = sck.recvfrom(1024)
+flag = str(datagram, FORMAT).rstrip("\n")
+print(flag)
 
 
 '''
