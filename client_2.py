@@ -1,7 +1,6 @@
 import socket
 
 # send
-
 FORMAT = "UTF-8"
 SERVER = "10.40.0.46"
 PORT = 9991
@@ -10,7 +9,8 @@ MESSAGE  = MESSAGE_STR.encode(FORMAT)
 
 ADDRESS = (SERVER, PORT)
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-client.sendto(MESSAGE, ADDRESS)
+client.connect(ADDRESS)
+client.send(MESSAGE)
 print(MESSAGE_STR)
 
 #receive 
