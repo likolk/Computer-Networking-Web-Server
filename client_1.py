@@ -1,15 +1,13 @@
 import socket
+import util
 
-FORMAT = "UTF-8"
-SERVER = "10.40.0.46"
 PORT = 9990
-ADDRESS = (SERVER, PORT)
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDRESS)
-data = client.recv(1024)
-flag = str(data, FORMAT).rstrip("\r\n")
+ADDRESS = (util.SERVER, PORT)
+sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sck.connect(ADDRESS)
+flag = util.recieve_and_format(sck)
 print(flag)
-client.close()
+sck.close()
 
 ''' 
 Citation:

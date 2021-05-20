@@ -1,16 +1,14 @@
 import socket
+import util
 from enum import Enum
 
-FORMAT = "UTF-8"
-SERVER = "10.40.0.46"
 PORT = 9993
-ADDRESS = (SERVER, PORT)
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDRESS)
+ADDRESS = (util.SERVER, PORT)
+sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sck.connect(ADDRESS)
 
 # Recieve the two file sizes
-data = client.recv(1024)
-msg = str(data, FORMAT).rstrip("\r\n")
+msg = util.recieve_and_format(sck)
 print(msg)
 
 # Split the message in 4 words and identify the file sizes
@@ -40,14 +38,12 @@ ratio = size_1/size_2
 print(ratio)
 
 # Send back the result
-msg = str(ratio).encode(FORMAT)
-client.sendto(msg, ADDRESS)
+util.encode_and_send(str(ratio), sck)
 
 # Get the flag
-datagram = client.recv(1024)
-flag = str(datagram, FORMAT).rstrip("\r\n")
+flag = util.recieve_and_format(sck)
 print(flag)
-client.close()
+sck.close()
 
 '''
 Citation:

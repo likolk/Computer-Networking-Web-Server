@@ -1,24 +1,21 @@
 import socket
+import util
 
 # send
-FORMAT = "UTF-8"
-SERVER = "10.40.0.46"
 PORT = 9991
-MESSAGE_STR = "helo"
-MESSAGE  = MESSAGE_STR.encode(FORMAT)
+MESSAGE = "helo"
 
-ADDRESS = (SERVER, PORT)
-client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-client.connect(ADDRESS)
-client.send(MESSAGE)
-print(MESSAGE_STR)
+ADDRESS = (util.SERVER, PORT)
+sck = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sck.connect(ADDRESS)
+util.encode_and_send(MESSAGE, sck)
+print(MESSAGE)
 
 #receive 
 
-datagram = client.recv(1024)
-flag = str(datagram, FORMAT).rstrip("\r\n")
+flag = util.recieve_and_format(sck)
 print(flag)
-client.close()
+sck.close()
 
 '''
 Citation:
