@@ -44,13 +44,5 @@ flag = str(data, FORMAT).rstrip("\r\n")
 print(flag)
 client.close
 
+#not finished
 
-''' 
-The total transmission delay by definition is going to be:
-
-L=1 Mb/s R1=1 Mbps R2=2 Mbps
-
-L = L/R1 + L/R2 = 8/1 + 8/2 = 12
-
-
-'''
