@@ -31,20 +31,26 @@ import socket
 
 FORMAT = "UTF-8"
 
-
-
 SERVER = "10.40.0.46"
-
 
 PORT = 9994
 
-
-ADDRESS = (SERVER, PORT)
-
+ADDRESS = (SERVER,PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-
 client.connect(ADDRESS)
+data = client.recv(1024)
+flag = str(data, FORMAT).rstrip("\r\n")
+print(flag)
+client.close
 
-# more code to be added
+
+''' 
+The total transmission delay by definition is going to be:
+
+L=1 Mb/s R1=1 Mbps R2=2 Mbps
+
+L = L/R1 + L/R2 = 8/1 + 8/2 = 12
+
+
+'''
