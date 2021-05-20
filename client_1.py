@@ -1,7 +1,6 @@
 import socket
 
 FORMAT = "UTF-8"
-DISCONNECT_MESSAGE = "!DC"
 SERVER = "10.40.0.46"
 PORT = 9990
 ADDRESS = (SERVER, PORT)
@@ -11,38 +10,6 @@ data = client.recv(1024)
 flag = str(data, FORMAT).rstrip("\r\n")
 print(flag)
 client.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ''' 
 Citation:

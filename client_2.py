@@ -8,16 +8,14 @@ PORT = 9991
 MESSAGE_STR = "helo"
 MESSAGE  = MESSAGE_STR.encode(FORMAT)
 
-DISCONNECT_MESSAGE = "!DC"
-
 ADDRESS = (SERVER, PORT)
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-client.sendto(MESSAGE, (SERVER, PORT))
+client.sendto(MESSAGE, ADDRESS)
 print(MESSAGE_STR)
 
 #receive 
 
-datagram, address = client.recvfrom(1024)
+datagram = client.recv(1024)
 flag = str(datagram, FORMAT).rstrip("\r\n")
 print(flag)
 client.close()
