@@ -16,36 +16,52 @@ L = L / R1   +    L / R2
 
 import socket
 import util
+from enum import Enum
 
 from tcpsim import *
 
-
 PORT = 9994
-
-ADDRESS = (util.SERVER,PORT)
-
+ADDRESS = (util.SERVER, PORT)
 sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 sck.connect(ADDRESS)
 
+# Table to convert file sizes and file transfer speeds to bits and bits/s
+class Sizes(Enum):
+    bits = 1
+    Kb = 1000
+    Mb = 1000 * Kb
+    Gb = 1000 * Mb
+    Kbps = 1000
+    Mbps = 1000 * Kbps
+    Gbps = 1000 * Mbps
+
+def get_value(part):
+    return int(part.split("=")[1])
+
+def get_size(part):
+    return Sizes[part].value
 
 #receive the values of variables L, R1, R2
+string = util.recieve_and_format(sck)
 
-L = util.recieve_and_format(sck)
-R1 = util.recieve_and_format(sck)
-R2 = util.recieve_and_format(sck)
+print(string)
+parts = string.split(" ")
+l = get_value(parts[0])
+l *= get_size(parts[1])
+r1 = get_value(parts[2])
+r1 *= get_size(parts[3])
+r2 = get_value(parts[4])
+r2 *= get_size(parts[5])
 
-d1 = L/R1
-d2 = L/R2
-
+d1 = l/r1
+d2 = l/r2
 
 finaldelay = d1 + d2
+print(finaldelay)
 
-util.encode_and_send(finaldelay, sck)
-
+util.encode_and_send(str(finaldelay), sck)
 
 flag = util.recieve_and_format(sck)
-
 print(flag)
 
 sck.close()
