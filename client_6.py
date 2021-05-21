@@ -1,27 +1,10 @@
 import socket
 import util
 
+# This program uses code from the tcpsim file to parse and make simulated TCP messages
+from tcpsim import *
+
 PORT = 9995
-SYN_STR = "SYN"
-ACK_STR = "ACK"
-SEQ_VALUE = "Seq"
-ACK_VALUE = "Ack"
-
-# Create a simulated TCP message with the given flags, seq number and ack number
-def make_string(flags, values):
-    for value in values:
-        flags += " " + value + "=" + str(values[value])
-    return flags
-
-# Parse a recieved string to get its "Seq" and "Ack" numbers
-def parse_string(str):
-    values = str.split(" ")
-    out = {}
-    for value in values:
-        v = value.split("=")
-        if (len(v) == 2):
-            out[v[0]] = int(v[1])
-    return out
 
 ADDRESS = (util.SERVER, PORT)
 sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -38,7 +21,7 @@ print(res)
 
 # Create seq and ack numbers for third string
 values = parse_string(res)
-values[SEQ_VALUE] = values[ACK_VALUE]
+values = next_segment(values)
 
 # Send the third string
 msg = make_string(ACK_STR, values)
