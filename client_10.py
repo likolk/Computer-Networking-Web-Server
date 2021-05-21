@@ -1,34 +1,75 @@
 import socket
+import util
+import math
 
-FORMAT = "UTF-8"
+from tcpsim import *
 
-SERVER = "10.40.0.46"
 
 PORT = 9999
 
 
-
-ADDRESS = (SERVER, PORT)
-
-client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+ADDRESS = (util.SERVER,PORT)
 
 
-
-datagram = client.recv(1024)
-
-flag = str(datagram, FORMAT).rstrip("\r\n")
+sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
-#to find the checksum of the 2 8bit words, we add them
-#and then apply 1's complement to the result aka flip all bits.
 
-''' not finished
-def checksum(msg):
-    s = 0
-    for i in range(0, len(msg)):
-'''
+sck.connect(ADDRESS)
 
+
+
+# Receive the string representantion of the first & second byte
+
+stringrepresentation = util.recieve_and_format(sck)
+print(stringrepresentation)
+
+#send back the internet checksum as a string
+
+
+def checksum(num):
+    # flip the bits aka 1's complement
+    bit = ''
+    inverse = ''
+    for i in bit:
+        if i == '0':
+            inverse = inverse + '1'
+        elif i == '1':
+            inverse = inverse + '0'
+        else:
+            pass
+
+
+            
+
+
+    
+
+
+
+msg = make_string(checksum) # if i add values here it does not compile, please have a look at it.
+print(msg)
+util.encode_and_send(msg,sck)
+
+# Receive the flag
+flag = util.recieve_and_format(sck)
+
+
+#print the flag
 
 print(flag)
 
-client.close()
+#close socket
+sck.close()
+
+
+
+
+
+
+'''
+
+Citation:
+https://www.geeksforgeeks.org/different-ways-to-invert-the-binary-bits-in-python/
+https://www.geeksforgeeks.org/invert-actual-bits-number/
+'''

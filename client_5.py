@@ -1,9 +1,3 @@
-
-
-
-
-
-
 '''
 Suppose there is exactly one switch between a sending host and a 
 receiving host. The transmission rates between the sending host 
@@ -18,31 +12,41 @@ and the transmission rate between the switch and the receiving host respectively
 L = length of packet.
 Therefore, given the values that we obtain from the server, we are going to compute:
 L = L / R1   +    L / R2 
-
-
-
-
 '''
 
-
-
 import socket
+import util
 
+from tcpsim import *
 
-FORMAT = "UTF-8"
-
-SERVER = "10.40.0.46"
 
 PORT = 9994
 
-ADDRESS = (SERVER,PORT)
+ADDRESS = (util.SERVER,PORT)
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDRESS)
-data = client.recv(1024)
-flag = str(data, FORMAT).rstrip("\r\n")
+sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+sck.connect(ADDRESS)
+
+
+#receive the values of variables L, R1, R2
+
+L = util.recieve_and_format(sck)
+R1 = util.recieve_and_format(sck)
+R2 = util.recieve_and_format(sck)
+
+d1 = L/R1
+d2 = L/R2
+
+
+finaldelay = d1 + d2
+
+util.encode_and_send(finaldelay, sck)
+
+
+flag = util.recieve_and_format(sck)
+
 print(flag)
-client.close
 
-#not finished
+sck.close()
 
