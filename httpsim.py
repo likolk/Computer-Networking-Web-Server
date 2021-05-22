@@ -36,10 +36,9 @@ class Response:
         self.str = read_line(socket)
         self.headers = ""
         s = read_line(socket)
-        self.headers += s
         while s != "\r\n":
-            s = read_line(socket)
             self.headers += s
+            s = read_line(socket)
         self.body = util.recieve_and_format(socket, 1024)
 
     def get_string(self):
@@ -47,5 +46,8 @@ class Response:
         if len(self.body) > 0:
             string += CARRIAGE_RETURN + self.body
         return string
+
+    def get_flag(self, flag_pos):
+        return self.body.split(" ")[flag_pos].rstrip(CARRIAGE_RETURN)
 
 

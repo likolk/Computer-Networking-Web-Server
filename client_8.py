@@ -15,6 +15,7 @@ sck.connect(ADDRESS)
 print(str, end="")
 util.encode_and_send(str, sck)
 
-res = util.recieve_and_format(sck)
-print(res)
-# TODO
+res = Response(sck)
+print(res.get_string())
+
+flag = res.get_flag(5)

@@ -1,5 +1,6 @@
 import socket
 import util
+import base64
 from httpsim import *
 
 PORT = 9998
@@ -19,4 +20,6 @@ util.encode_and_send(str + "\r\n", sck)
 
 res = Response(sck)
 print(res.get_string())
-# TODO
+
+flag_64 = base64.b64decode(res.get_flag(2))
+flag = flag_64.decode("ASCII").rstrip('\n')
