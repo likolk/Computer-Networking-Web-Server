@@ -2,74 +2,40 @@ import socket
 import util
 import math
 
-from tcpsim import *
-
-
+LIMIT = math.pow(2,8)
 PORT = 9999
-
-
 ADDRESS = (util.SERVER,PORT)
-
-
 sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-
-
 sck.connect(ADDRESS)
 
-
-
 # Receive the string representantion of the first & second byte
+string_representation = util.recieve_and_format(sck)
+print(string_representation)
+a, b = string_representation.split(" ")
 
-stringrepresentation = util.recieve_and_format(sck)
-print(stringrepresentation)
+def checksum(a, b):
+    a = int(a, 2)
+    b = int(b, 2)
+    a = a + b
+    if (a > LIMIT):
+        a -= LIMIT
+        a += 1
+    out = ""
+    for i in range(7, -1, -1):
+        if a >= math.pow(2,i):
+            out += '0'
+            a -= math.pow(2,i)
+        else:
+            out += '1'
+    return out
 
 #send back the internet checksum as a string
-
-
-def checksum(num):
-    # flip the bits aka 1's complement
-    bit = ''
-    inverse = ''
-    for i in bit:
-        if i == '0':
-            inverse = inverse + '1'
-        elif i == '1':
-            inverse = inverse + '0'
-        else:
-            pass
-
-
-            
-
-
-    
-
-
-
-msg = make_string(checksum) # if i add values here it does not compile, please have a look at it.
+msg = checksum(a, b)
 print(msg)
 util.encode_and_send(msg,sck)
 
 # Receive the flag
 flag = util.recieve_and_format(sck)
-
-
-#print the flag
-
 print(flag)
 
-#close socket
 sck.close()
-
-
-
-
-
-
-'''
-
-Citation:
-https://www.geeksforgeeks.org/different-ways-to-invert-the-binary-bits-in-python/
-https://www.geeksforgeeks.org/invert-actual-bits-number/
-'''
