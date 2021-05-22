@@ -9,5 +9,5 @@ where `<username>` is your name with spaces replaced by dots. This will send fla
 | Student name     | username                                                        |
 |------------------|-----------------------------------------------------------------|
 | Ian Abuaf Pelo   | ian.abuaf.pelo                                                  |
-| Kelvin Likollari | TODO please confirm your username here after you sent the flags |
+| Kelvin Likollari | kelvin.likollari |
 | Kieran McKee     | TODO please confirm your username here after you sent the flags |
