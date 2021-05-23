@@ -1,19 +1,19 @@
 import util
 
-CARRIAGE_RETURN = "\r\n"
+CRLF = "\r\n"
 
 class Request:
     def __init__(self, method, target, version):
         self.headers = ""
         self.body = ""
-        self.str = method + " " + target + " " + version + CARRIAGE_RETURN
+        self.str = method + " " + target + " " + version + CRLF
 
     def get_string(self):
-        string = self.str + self.headers + CARRIAGE_RETURN + self.body
+        string = self.str + self.headers + CRLF + self.body
         return string
 
     def add_header(self, key, value):
-        self.headers += key + ": " + value + CARRIAGE_RETURN
+        self.headers += key + ": " + value + CRLF
 
     def set_body(self, body):
         self.body = body
@@ -44,10 +44,10 @@ class Response:
     def get_string(self):
         string = self.str + self.headers
         if len(self.body) > 0:
-            string += CARRIAGE_RETURN + self.body
+            string += CRLF + self.body
         return string
 
     def get_flag(self, flag_pos):
-        return self.body.split(" ")[flag_pos].rstrip(CARRIAGE_RETURN)
+        return self.body.split(" ")[flag_pos].rstrip(CRLF)
 
 
