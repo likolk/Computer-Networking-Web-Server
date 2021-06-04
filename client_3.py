@@ -1,7 +1,7 @@
 import socket
 import util
 
-DISCONNECT_MESSAGE = "!DC"
+DISCONNECT_MESSAGE = "!DC" # You defined it but never use 
 PORT = 9992
 ADDRESS = (util.SERVER, PORT)
 sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

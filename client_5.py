@@ -11,12 +11,12 @@ We have R1 and R2 that are the transmission rates between the sending host and t
 and the transmission rate between the switch and the receiving host respectively.
 L = length of packet.
 Therefore, given the values that we obtain from the server, we are going to compute:
-L = L / R1   +    L / R2 
+L = L / R1   +    L / R2 -> correct
 '''
 
 import socket
 import util
-from enum import Enum
+from enum import Enum # This module is not allowed to use for the exercise but it's not so serious
 
 from tcpsim import *
 
